@@ -14,11 +14,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
-                .anyRequest()
+                .authorizeRequests()
+                    .antMatchers("/public")
+                    .permitAll()
+                    .and()
+                .authorizeRequests()
+                    .anyRequest()
                     .authenticated()
-            .and()
-                .oauth2ResourceServer()
+                .and()
+                    .oauth2ResourceServer()
                     .jwt();
     }
 }
